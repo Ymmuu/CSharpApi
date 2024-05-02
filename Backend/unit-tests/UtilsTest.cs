@@ -51,24 +51,21 @@ public class UtilsTest
 
 
     [Fact]
-        public void TestRemoveBadWords()
+    public void TestRemoveBadWords()
+    {
+        var read = File.ReadAllText(Path.Combine("json", "bad-words.json"));
+        Arr badWords = JSON.Parse(read);
+
+        foreach (var badWord in badWords)
         {
-            var read = File.ReadAllText(Path.Combine("json", "bad-words.json"));
-            Arr badWords = JSON.Parse(read);
+            var input = "This is a test sentence with the bad word: " + badWord;
+            var output = "Test sentence with the bad word: ****";
 
-            foreach (var badWord in badWords)
-            {
-                var input = "This is a test sentence with the bad word: " + badWord;
-                var output = "Test sentence with the bad word: ****";
+            var result = Utils.RemoveBadWords(input, "****");
 
-                var result = Utils.RemoveBadWords(input, "****");
-
-                Assert.Equal(output, result);
-            }
+            Assert.Equal(output, result);
         }
-
-
-
-    
-
     }
+
+
+}
