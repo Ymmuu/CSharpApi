@@ -15,4 +15,4 @@ Globals = Obj(new
 // Server.Start();
 
 // Starta test:
-// new UtilsTest().TestCreateMockUsers();
+new UtilsTest().TestRemoveBadWords();
