@@ -11,4 +11,8 @@ Globals = Obj(new
     sessionLifeTimeHours = 2
 });
 
-Server.Start();
+// Starta server:
+// Server.Start();
+
+// Starta test:
+// new UtilsTest().TestCreateMockUsers();
