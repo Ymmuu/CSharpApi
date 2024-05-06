@@ -1,38 +1,50 @@
 using Xunit;
-namespace WebApp;
+using Xunit.Abstractions;
 
+namespace WebApp;
 public class UtilsTest
 {
+ 
+    // Note: You need to use the following command line command 
+    // dotnet test --logger "console;verbosity=detailed"
+    // for the logging to work
+    private readonly ITestOutputHelper output;
+    public UtilsTest(ITestOutputHelper output)
+    {
+        this.output = output;
+    }
+
 
     /*
     [Fact]
     public void TestCreateMockUsers()
     {
-        // Read all mock-users from JSON file
-        var read = File.ReadAllText(Path.Combine("json", "mock-users.json"));
+        // Read all mock users from the JSON file
+        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
         Arr mockUsers = JSON.Parse(read);
-        /*
-        foreach(var user in mockUsers)
-        {
-            //Log(user);
-        }
-        
 
-        // Get all users from DB
+        // Get all users from the database
         Arr usersInDb = SQLQuery("SELECT email FROM users");
-        Arr emailIsInDb = usersInDb.Map(user => user.email);
-        // Only keep the mock users not already in DB
-        Arr mockUsersNotInDb = mockUsers.Filter(mockUser => !emailIsInDb.Contains(mockUser.email));
-        //Asserts that the CreateMockUsers only return newly created users in the db
+        Arr emailsInDb = usersInDb.Map(user => user.email);
+
+        // Only keep the mock users not already in db
+        Arr mockUsersNotInDb = mockUsers.Filter(
+            mockUser => !emailsInDb.Contains(mockUser.email)
+        );
+
+        // Get the result of running the method in our code
         var result = Utils.CreateMockUsers();
-
-        //Log("calculated by test", mockUsersNotInDb);
-        //Log("reported by method", result);
-
-        // Assert the same length
-        Assert.Equal(mockUsersNotInDb.Length, result.Length);
+        // Assert that the CreateMockUsers only return
+        // newly created users in the db
+        output.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
+        output.WriteLine($"And {result.Length} users were added.");
+        output.WriteLine("The test also asserts that the users added " +
+            "are equivalent (the same) to the expected users!");
+        Assert.Equivalent(mockUsersNotInDb, result);
+        output.WriteLine("The test passed!");
     }
     */
+
 
     /*
     [Fact]
@@ -53,6 +65,7 @@ public class UtilsTest
     */
 
 
+    
     [Fact]
     public void TestRemoveBadWords()
     {
@@ -67,6 +80,13 @@ public class UtilsTest
 
         Assert.Equal(expectedOutput, result);
     }
+    
+
+
+
 
 
 }
+
+
+    
