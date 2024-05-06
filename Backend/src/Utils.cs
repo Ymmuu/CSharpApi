@@ -55,13 +55,13 @@ public static class Utils
 
     public static string RemoveBadWords(string input, string expectedOutput)
     {
-        var read = File.ReadAllText(Path.Combine("json", "bad-words.json"));
+        var read = File.ReadAllText(FilePath("json", "bad-words.json"));
         Arr badWords = JSON.Parse(read);
 
         foreach (var badWord in badWords)
-        {
-            input = input.Replace(badWord, expectedOutput);
-        }
+    {
+        input = input.Replace(badWord.Value.ToString(), expectedOutput);
+    }
 
         return input;
     }

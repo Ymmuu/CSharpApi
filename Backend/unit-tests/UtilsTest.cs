@@ -69,7 +69,7 @@ public class UtilsTest
     [Fact]
     public void TestRemoveBadWords()
     {
-        var read = File.ReadAllText(Path.Combine("json", "bad-words.json"));
+        var read = File.ReadAllText(FilePath("json", "bad-words.json"));
         Arr badWords = JSON.Parse(read);
 
         var input = "Hello. This is a test sentence with fuck, hell and shit.";
@@ -79,11 +79,12 @@ public class UtilsTest
         var result = Utils.RemoveBadWords(input, "****");
 
         Assert.Equal(expectedOutput, result);
+
+        output.WriteLine($"{result}");
+
+
     }
     
-
-
-
 
 
 }
