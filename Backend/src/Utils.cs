@@ -10,6 +10,7 @@ public static class Utils
         var read = File.ReadAllText(FilePath("json", "mock-users.json"));
         Arr mockUsers = JSON.Parse(read);
         Arr successFullyWrittenUsers = Arr();
+
         foreach (var user in mockUsers)
         {
             user.password = "12345678";
@@ -29,6 +30,41 @@ public static class Utils
         return successFullyWrittenUsers;
     }
     */
+
+
+    /*
+    public static Arr RemoveMockUsers()
+    {
+
+        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
+        Arr mockUsers = JSON.Parse(read);
+        Arr successfullyRemovedUsers = Arr();
+
+        foreach (var user in mockUsers)
+        {
+            var result = SQLQueryOne(
+                @"DELETE FROM users
+                WHERE email = $email",
+                new { email = user.email }
+            );
+
+
+            if (!result.HasKey("error"))
+            {
+                user.Delete("password");
+                successfullyRemovedUsers.Push(user);
+            }
+        }
+
+        return successfullyRemovedUsers;
+    }
+    */
+
+
+
+
+
+
 
 
     /*
@@ -52,7 +88,7 @@ public static class Utils
     
 
 
-
+    /*
     public static string RemoveBadWords(string input, string expectedOutput)
     {
         var read = File.ReadAllText(FilePath("json", "bad-words.json"));
@@ -65,6 +101,7 @@ public static class Utils
 
         return input;
     }
+    */
 
 
 }

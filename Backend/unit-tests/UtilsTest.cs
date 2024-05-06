@@ -48,6 +48,45 @@ public class UtilsTest
 
     /*
     [Fact]
+    public void TestRemoveMockUsers()
+    {
+        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
+        Arr mockUsers = JSON.Parse(read);
+
+        Arr usersBeforeRemoval = SQLQuery("SELECT email FROM users");
+
+        // Get the result of running the method in our code
+        var result = Utils.RemoveMockUsers();
+
+        // Get all users from the database after removing mock users
+        Arr usersAfterRemoval = SQLQuery("SELECT email FROM users");
+
+
+        Assert.IsType<Arr>(result);
+        foreach (var user in result)
+        {
+            Assert.False(user.HasKey("password"));
+        }
+
+        // Assert that only the mock users have been removed from the database
+        foreach (var user in mockUsers)
+        {
+            Assert.DoesNotContain(user.email, usersAfterRemoval.Map(u => u.email));
+        }
+
+        Assert.Equal(usersBeforeRemoval.Length - result.Length, usersAfterRemoval.Length);
+
+
+        output.WriteLine($"{usersAfterRemoval}");
+
+    }
+    /*
+
+
+
+
+    /*
+    [Fact]
     public void TestIsPasswordGoodEnough()
     {
         Assert.True(Utils.IsPasswordGoodEnough("Password1234!"));
@@ -65,7 +104,7 @@ public class UtilsTest
     */
 
 
-    
+    /*
     [Fact]
     public void TestRemoveBadWords()
     {
@@ -82,8 +121,8 @@ public class UtilsTest
 
         output.WriteLine($"{result}");
 
-
     }
+    */
     
 
 
