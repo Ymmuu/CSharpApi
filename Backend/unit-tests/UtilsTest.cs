@@ -5,9 +5,9 @@ namespace WebApp;
 public class UtilsTest
 {
  
-    // Note: You need to use the following command line command 
-    // dotnet test --logger "console;verbosity=detailed"
-    // for the logging to work
+    // Note: You need to use the following command line command
+    // dotnet r unit-tests
+    
     private readonly ITestOutputHelper output;
     public UtilsTest(ITestOutputHelper output)
     {
@@ -125,12 +125,13 @@ public class UtilsTest
     */
     
 
-
+    /*
     Hur många använ­dare har samma domän i sin email? En metod som sum­me­rar hur många använ­dare som har samma domän
     i sin email. Meto­den ska läsa users-ta­bel­len i data­ba­sen, via meto­den SQL­Query - som är glo­bal i pro­jek­tet).
     Den ska retur­nera ett Obj (se Dyn­da­tas doku­men­ta­tion för Obj). I detta objekt ska varje domän vara en
      nyc­kel/egen­skap och vär­det till­hö­rande en nyc­kel ska vara hur många gånger just detta domän före­kom­mer 
      bland använ­dar­nas email. Meto­den har inga inpa­ra­met­rar och ska döpas till Count­Do­mains­FromU­se­rE­mails.
+     */
 
 
 
