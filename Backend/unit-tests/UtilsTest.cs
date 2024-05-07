@@ -1,19 +1,11 @@
-using Xunit;
-using Xunit.Abstractions;
-
 namespace WebApp;
-public class UtilsTest
+
+
+public class UtilsTest(Xlog Console)
 {
- 
     // Note: You need to use the following command line command
     // dotnet r unit-tests
     
-    private readonly ITestOutputHelper output;
-    public UtilsTest(ITestOutputHelper output)
-    {
-        this.output = output;
-    }
-
 
     /*
     [Fact]
@@ -36,12 +28,12 @@ public class UtilsTest
         var result = Utils.CreateMockUsers();
         // Assert that the CreateMockUsers only return
         // newly created users in the db
-        output.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
-        output.WriteLine($"And {result.Length} users were added.");
-        output.WriteLine("The test also asserts that the users added " +
+        Console.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
+        Console.WriteLine($"And {result.Length} users were added.");
+        Console.WriteLine("The test also asserts that the users added " +
             "are equivalent (the same) to the expected users!");
         Assert.Equivalent(mockUsersNotInDb, result);
-        output.WriteLine("The test passed!");
+        Console.WriteLine("The test passed!");
     }
     */
 
@@ -77,7 +69,7 @@ public class UtilsTest
         Assert.Equal(usersBeforeRemoval.Length - result.Length, usersAfterRemoval.Length);
 
 
-        output.WriteLine($"{usersAfterRemoval}");
+        Console.WriteLine($"{usersAfterRemoval}");
 
     }
     /*
@@ -119,7 +111,7 @@ public class UtilsTest
 
         Assert.Equal(expectedOutput, result);
 
-        output.WriteLine($"{result}");
+        Console.WriteLine($"{result}");
 
     }
     */
