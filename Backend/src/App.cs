@@ -6,13 +6,9 @@ Globals = Obj(new
     aclOn = true,
     isSpa = true,
     port = 3001,
-    serverName = "Ironboy's Minimal API Server",
+    serverName = "Jimmys Minimal API Server",
     frontendPath = FilePath("..", "Frontend"),
     sessionLifeTimeHours = 2
 });
 
-// Starta server:
-// Server.Start();
-
-// Starta test:
-// new UtilsTest().TestCreateMockUsers();
+Server.Start();
