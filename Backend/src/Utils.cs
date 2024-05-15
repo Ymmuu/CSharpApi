@@ -3,17 +3,23 @@ namespace WebApp;
 public static class Utils
 {
 
-    /*
+    // Read all mock users from file
+    private static readonly Arr mockUsers = JSON.Parse(
+        File.ReadAllText(FilePath("json", "mock-users.json"))
+    );
+
+    private static readonly Arr badWords = ((Arr)JSON.Parse(
+        File.ReadAllText(FilePath("json", "bad-words.json"))
+    )).Sort((a, b) => ((string)b).Length - ((string)a).Length);
+
+
     public static Arr CreateMockUsers()
     {
-        // Read all mock users from the JSON file
-        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
-        Arr mockUsers = JSON.Parse(read);
         Arr successFullyWrittenUsers = Arr();
 
         foreach (var user in mockUsers)
         {
-            user.password = "12345678";
+            // user.password = "12345678";
             var result = SQLQueryOne(
                 @"INSERT INTO users(firstName,lastName,email,password)
                 VALUES($firstName, $lastName, $email, $password)
@@ -29,7 +35,6 @@ public static class Utils
         }
         return successFullyWrittenUsers;
     }
-    */
 
 
     /*

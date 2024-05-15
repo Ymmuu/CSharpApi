@@ -4,24 +4,22 @@ using Xunit.Abstractions;
 namespace WebApp;
 public class UtilsTest
 {
- 
     // Note: You need to use the following command line command
     // dotnet r unit-tests
-    
     private readonly ITestOutputHelper output;
     public UtilsTest(ITestOutputHelper output)
     {
         this.output = output;
     }
 
+    private static readonly Arr mockUsers = JSON.Parse(
+        File.ReadAllText(FilePath("json", "mock-users.json"))
+    );
 
-    /*
+
     [Fact]
     public void TestCreateMockUsers()
     {
-        // Read all mock users from the JSON file
-        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
-        Arr mockUsers = JSON.Parse(read);
 
         // Get all users from the database
         Arr usersInDb = SQLQuery("SELECT email FROM users");
@@ -43,7 +41,6 @@ public class UtilsTest
         Assert.Equivalent(mockUsersNotInDb, result);
         output.WriteLine("The test passed!");
     }
-    */
 
 
     /*
