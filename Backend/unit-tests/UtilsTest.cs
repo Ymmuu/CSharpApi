@@ -37,25 +37,24 @@ public class UtilsTest(Xlog Console)
     }
     
 
-    /*
+    
     [Fact]
     public void TestCountDomainsFromUserEmails()
     {
-        Obj expectedResult = Obj();
-        expectedResult["example.com"] = 3; // Uppdatera detta med det faktiska antalet användare
+        var result = Utils.CountDomainsFromUserEmails();
 
+        Assert.True(result.GetKeys().Count() > 0);
 
-        // Ändra denna till USER DELETED och inte de som är kvar. Console.WriteLine($"{usersAfterRemoval}");
+        Console.WriteLine("User count per domain:");
+        foreach (var count in result.GetKeys())
+        {
+            var domain = count.ToString();
+            var userCount = (int)result[domain];
+            Console.WriteLine($"Domain: {domain}, User count: {userCount}");
+        }
 
-    
-
-        // Kör metoden för att räkna domäner från användar-e-postadresser
-        Obj result = Utils.CountDomainsFromUserEmails();
-
-
-        Assert.Equal(expectedResult, result);
     }
-    */
+    
     
 
 
@@ -115,7 +114,7 @@ public class UtilsTest(Xlog Console)
     }
 
 
-
+    
     [Fact]
     public void TestRemoveMockUsers()
     {
@@ -139,9 +138,7 @@ public class UtilsTest(Xlog Console)
         Console.WriteLine($"{successfullyRemovedUsers}");
 
     }
+    
 
 
 }
-
-
-    

@@ -36,29 +36,43 @@ public static class Utils
 
 
     public static Obj CountDomainsFromUserEmails()
-        {
-            Arr users = SQLQuery("SELECT email FROM users");
-            Dictionary<string, int> domainCounts = new Dictionary<string, int>();
+    {
 
-            foreach (var user in users)
+        var users = SQLQuery(@"SELECT email FROM users");
+
+        Dictionary<string, int> domainCounts = new Dictionary<string, int>();
+
+        Regex domainRegex = new Regex(@"@(?<domain>[\w.-]+)$");
+
+        foreach (var user in users)
+        {
+            string email = user["email"];
+            Match match = domainRegex.Match(email);
+
+            if (match.Success)
             {
-                string email = (string)user.email;
-                string domain = email.Split('@')[1];
+                string domain = match.Groups["domain"].Value;
 
                 if (domainCounts.ContainsKey(domain))
+                {
                     domainCounts[domain]++;
+                }
                 else
+                {
                     domainCounts[domain] = 1;
+                }
             }
-
-            Obj result = Obj();
-            foreach (var kvp in domainCounts)
-            {
-                result[kvp.Key] = kvp.Value;
-            }
-
-            return result;
         }
+
+        Obj result = new Obj();
+        foreach (var domainCount in domainCounts)
+        {
+            result[domainCount.Key] = domainCount.Value;
+        }
+
+        return result;
+    }
+
 
 
     public static bool IsPasswordGoodEnough(string password)
@@ -102,6 +116,7 @@ public static class Utils
     }
     
 
+    
     public static Arr RemoveMockUsers()
     {
         Arr successfullyRemovedUsers = Arr();
@@ -123,6 +138,7 @@ public static class Utils
 
         return successfullyRemovedUsers;
     }
+    
     
 
 }
