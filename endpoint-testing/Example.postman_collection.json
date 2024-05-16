@@ -1380,15 +1380,18 @@
 			"response": []
 		},
 		{
-			"name": "Check categories",
+			"name": "Check categories visitor",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/categories",
+					"raw": "http://127.0.0.1:3001/api/categories",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1400,15 +1403,18 @@
 			"response": []
 		},
 		{
-			"name": "Check products",
+			"name": "Check products visitor",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/products",
+					"raw": "http://127.0.0.1:3001/api/products",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1420,15 +1426,18 @@
 			"response": []
 		},
 		{
-			"name": "Check comments",
+			"name": "Check comments visitor",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/comments",
+					"raw": "http://127.0.0.1:3001/api/comments",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1440,13 +1449,46 @@
 			"response": []
 		},
 		{
-			"name": "Make a comment",
+			"name": "Make a comment visitor",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"comment\": \"Sinnes snabba wawawiwa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/api/comments/6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"comments",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit comments visitor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"Bra skit!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1464,6 +1506,66 @@
 						"api",
 						"comments",
 						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit categories visitor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Övrigt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/categories/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"categories",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit products visitor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Nytt i lager\", \"description\": \"Testa detta bla bla\", \"price\": \"29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/products/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"products",
+						"10"
 					]
 				}
 			},
@@ -1484,10 +1586,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/login",
+					"raw": "http://127.0.0.1:3001/api/login",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1499,15 +1604,18 @@
 			"response": []
 		},
 		{
-			"name": "Check categories",
+			"name": "Check categories user",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/categories",
+					"raw": "http://127.0.0.1:3001/api/categories",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1519,15 +1627,18 @@
 			"response": []
 		},
 		{
-			"name": "Check products",
+			"name": "Check products user",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/products",
+					"raw": "http://127.0.0.1:3001/api/products",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1539,15 +1650,18 @@
 			"response": []
 		},
 		{
-			"name": "Check comments",
+			"name": "Check comments user",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/comments",
+					"raw": "http://127.0.0.1:3001/api/comments",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "3001",
 					"path": [
@@ -1559,13 +1673,46 @@
 			"response": []
 		},
 		{
-			"name": "Make a comment",
+			"name": "Make a comment user",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"comment\": \"Sinnes snabba wawawiwa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/api/comments/6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"comments",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit comments user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"Bra skit!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1583,6 +1730,66 @@
 						"api",
 						"comments",
 						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit categories user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Övrigt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/categories/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"categories",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit products user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Nytt i lager\", \"description\": \"Testa detta bla bla\", \"price\": \"29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/products/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"products",
+						"10"
 					]
 				}
 			},
