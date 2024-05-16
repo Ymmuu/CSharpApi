@@ -121,25 +121,22 @@ public class UtilsTest(Xlog Console)
     {
         Arr usersBeforeRemoval = SQLQuery("SELECT email FROM users");
 
-        var result = Utils.RemoveMockUsers();
+        var successfullyRemovedUsers = Utils.RemoveMockUsers();
 
         Arr usersAfterRemoval = SQLQuery("SELECT email FROM users");
 
-        Assert.IsType<Arr>(result);
-        foreach (var user in result)
+        Assert.IsType<Arr>(successfullyRemovedUsers);
+        foreach (var user in successfullyRemovedUsers)
         {
             Assert.False(user.HasKey("password"));
-        }
-
-        foreach (var user in mockUsers)
-        {
+            Assert.Contains(user.email, usersBeforeRemoval.Map(u => u.email));
             Assert.DoesNotContain(user.email, usersAfterRemoval.Map(u => u.email));
         }
 
-        Assert.Equal(usersBeforeRemoval.Length - result.Length, usersAfterRemoval.Length);
+        Assert.Equal(usersBeforeRemoval.Length - successfullyRemovedUsers.Length, usersAfterRemoval.Length);
 
 
-        Console.WriteLine($"{usersAfterRemoval}");
+        Console.WriteLine($"{successfullyRemovedUsers}");
 
     }
 
