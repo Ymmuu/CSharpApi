@@ -1,8 +1,7 @@
-using Xunit;
-using Xunit.Abstractions;
-
 namespace WebApp;
-public class UtilsTest
+
+
+public class UtilsTest(Xlog Console)
 {
     // Note: You need to use the following command line command
     // dotnet r unit-tests
@@ -28,13 +27,18 @@ public class UtilsTest
         );
 
         var result = Utils.CreateMockUsers();
+
+        // Assert that the CreateMockUsers only return
+        // newly created users in the db
+        Console.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
+        Console.WriteLine($"And {result.Length} users were added.");
+        Console.WriteLine("The test also asserts that the users added " +
+        // funkar inte Console.WL, använd output.WriteLine
        
-        output.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
-        output.WriteLine($"And {result.Length} users were added.");
-        output.WriteLine("The test also asserts that the users added " +
+        
             "are equivalent (the same) to the expected users!");
         Assert.Equivalent(mockUsersNotInDb, result);
-        output.WriteLine("The test passed!");
+        Console.WriteLine("The test passed!");
     }
     
 
@@ -45,8 +49,15 @@ public class UtilsTest
             Obj expectedResult = Obj();
             expectedResult["example.com"] = 3; // Uppdatera detta med det faktiska antalet användare
 
+
+        Console.WriteLine($"{usersAfterRemoval}");
+
+    }
+    
+
             // Kör metoden för att räkna domäner från användar-e-postadresser
             Obj result = Utils.CountDomainsFromUserEmails();
+
 
             Assert.Equal(expectedResult, result);
         }
@@ -84,7 +95,8 @@ public class UtilsTest
 
         Assert.Equal(expectedOutput, result);
 
-        output.WriteLine($"{result}");
+        Console.WriteLine($"{result}");
+
     }
     */
 

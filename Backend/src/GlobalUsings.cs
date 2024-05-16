@@ -15,3 +15,5 @@ global using WebApp;
 global using static WebApp.Shared;
 global using static WebApp.RequestBodyParser;
 global using static WebApp.DbQuery;
+global using Xunit;
+global using Xlog = Xunit.Abstractions.ITestOutputHelper;
