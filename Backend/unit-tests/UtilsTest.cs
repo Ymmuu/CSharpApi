@@ -5,98 +5,82 @@ public class UtilsTest(Xlog Console)
 {
     // Note: You need to use the following command line command
     // dotnet r unit-tests
+    private readonly ITestOutputHelper output;
+    public UtilsTest(ITestOutputHelper output)
+    {
+        this.output = output;
+    }
+    private static readonly Arr mockUsers = JSON.Parse(
+        File.ReadAllText(FilePath("json", "mock-users.json"))
+    );
     
 
-    /*
+    
     [Fact]
     public void TestCreateMockUsers()
     {
-        // Read all mock users from the JSON file
-        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
-        Arr mockUsers = JSON.Parse(read);
-
-        // Get all users from the database
         Arr usersInDb = SQLQuery("SELECT email FROM users");
         Arr emailsInDb = usersInDb.Map(user => user.email);
 
-        // Only keep the mock users not already in db
         Arr mockUsersNotInDb = mockUsers.Filter(
             mockUser => !emailsInDb.Contains(mockUser.email)
         );
 
-        // Get the result of running the method in our code
         var result = Utils.CreateMockUsers();
+
         // Assert that the CreateMockUsers only return
         // newly created users in the db
         Console.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
         Console.WriteLine($"And {result.Length} users were added.");
         Console.WriteLine("The test also asserts that the users added " +
+        // funkar inte Console.WL, använd output.WriteLine
+       
+        
             "are equivalent (the same) to the expected users!");
         Assert.Equivalent(mockUsersNotInDb, result);
         Console.WriteLine("The test passed!");
     }
-    */
+    
 
 
-    /*
     [Fact]
-    public void TestRemoveMockUsers()
-    {
-        var read = File.ReadAllText(FilePath("json", "mock-users.json"));
-        Arr mockUsers = JSON.Parse(read);
-
-        Arr usersBeforeRemoval = SQLQuery("SELECT email FROM users");
-
-        // Get the result of running the method in our code
-        var result = Utils.RemoveMockUsers();
-
-        // Get all users from the database after removing mock users
-        Arr usersAfterRemoval = SQLQuery("SELECT email FROM users");
-
-
-        Assert.IsType<Arr>(result);
-        foreach (var user in result)
+        public void TestCountDomainsFromUserEmails()
         {
-            Assert.False(user.HasKey("password"));
-        }
-
-        // Assert that only the mock users have been removed from the database
-        foreach (var user in mockUsers)
-        {
-            Assert.DoesNotContain(user.email, usersAfterRemoval.Map(u => u.email));
-        }
-
-        Assert.Equal(usersBeforeRemoval.Length - result.Length, usersAfterRemoval.Length);
+            Obj expectedResult = Obj();
+            expectedResult["example.com"] = 3; // Uppdatera detta med det faktiska antalet användare
 
 
         Console.WriteLine($"{usersAfterRemoval}");
 
     }
-    /*
+    
+
+            // Kör metoden för att räkna domäner från användar-e-postadresser
+            Obj result = Utils.CountDomainsFromUserEmails();
 
 
+            Assert.Equal(expectedResult, result);
+        }
+
+    
 
 
-    /*
-    [Fact]
-    public void TestIsPasswordGoodEnough()
+    [Theory]
+    [InlineData("abC9#fgh", true)]  // ok
+    [InlineData("stU5/xyz", true)]  // ok too
+    [InlineData("abC9#fg", false)]  // too short
+    [InlineData("abCd#fgh", false)] // no digit
+    [InlineData("abc9#fgh", false)] // no capital letter
+    [InlineData("abC9efgh", false)] // no special character
+    public void TestIsPasswordGoodEnough(string password, bool expected)
     {
-        Assert.True(Utils.IsPasswordGoodEnough("Password1234!"));
-
-        Assert.False(Utils.IsPasswordGoodEnough("Passwor"));
-
-        Assert.False(Utils.IsPasswordGoodEnough("password1!"));
-
-        Assert.False(Utils.IsPasswordGoodEnough("PASSWORD1!"));
-
-        Assert.False(Utils.IsPasswordGoodEnough("Password!"));
-
-        Assert.False(Utils.IsPasswordGoodEnough("Password1"));
+        Assert.Equal(expected, Utils.IsPasswordGoodEnough(password));
     }
-    */
+    
 
+    /* 
+    // Skrev denna själv med fick inte rätt på tex "hello", då suddades "hell" ut och skrevs ut ****o.
 
-    /*
     [Fact]
     public void TestRemoveBadWords()
     {
@@ -115,18 +99,55 @@ public class UtilsTest(Xlog Console)
 
     }
     */
-    
 
-    /*
-    Hur många använ­dare har samma domän i sin email? En metod som sum­me­rar hur många använ­dare som har samma domän
-    i sin email. Meto­den ska läsa users-ta­bel­len i data­ba­sen, via meto­den SQL­Query - som är glo­bal i pro­jek­tet).
-    Den ska retur­nera ett Obj (se Dyn­da­tas doku­men­ta­tion för Obj). I detta objekt ska varje domän vara en
-     nyc­kel/egen­skap och vär­det till­hö­rande en nyc­kel ska vara hur många gånger just detta domän före­kom­mer 
-     bland använ­dar­nas email. Meto­den har inga inpa­ra­met­rar och ska döpas till Count­Do­mains­FromU­se­rE­mails.
-     */
+    [Theory]
+    [InlineData(
+        "---",
+        "Hello, I am going through hell. Hell is a real fucking place " +
+            "outside your goddamn comfy tortoiseshell!",
+        "Hello, I am going through ---. --- is a real --- place " +
+            "outside your --- comfy tortoiseshell!"
+    )]
+    [InlineData(
+        "---",
+        "Rhinos have a horny knob? (or what should I call it) on " +
+            "their heads. And doorknobs are damn round.",
+        "Rhinos have a --- ---? (or what should I call it) on " +
+            "their heads. And doorknobs are --- round."
+    )]
+    public void TestRemoveBadWords(string replaceWith, string original, string expected)
+    {
+        Assert.Equal(expected, Utils.RemoveBadWords(original, replaceWith));
+    }
 
 
 
+    [Fact]
+    public void TestRemoveMockUsers()
+    {
+        Arr usersBeforeRemoval = SQLQuery("SELECT email FROM users");
+
+        var result = Utils.RemoveMockUsers();
+
+        Arr usersAfterRemoval = SQLQuery("SELECT email FROM users");
+
+        Assert.IsType<Arr>(result);
+        foreach (var user in result)
+        {
+            Assert.False(user.HasKey("password"));
+        }
+
+        foreach (var user in mockUsers)
+        {
+            Assert.DoesNotContain(user.email, usersAfterRemoval.Map(u => u.email));
+        }
+
+        Assert.Equal(usersBeforeRemoval.Length - result.Length, usersAfterRemoval.Length);
+
+
+        output.WriteLine($"{usersAfterRemoval}");
+
+    }
 
 
 }
