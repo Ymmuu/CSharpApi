@@ -1,12 +1,12 @@
 Feature: As a user I want to be able to see all prices of all products when I have chosen the category "Alla" and that correct prices shows on all products when i choose a category.
 
-  Scenario Outline: When I choose the category "<category>" the product "<productName>" should be shown with the price "<price>".
+  Scenario Outline: When I choose the category "<category>" the product "<productName>" should be shown with the price "<price>"
     Given that I go to the product page
     When I choose to see the category "<category>"
     Then the product "<productName>" should be shown with the price "<price>"
 
     Examples:
-      | category    | productName                   | price |
+      | category    | productName                   | price|
       | Alla        | Adidas Adipower               | 3399 |
       | Alla        | Adidas Ctrl                   | 3149 |
       | Alla        | Adidas Metalbone              | 3249 |
@@ -39,7 +39,3 @@ Feature: As a user I want to be able to see all prices of all products when I ha
       | Kläder      | Adidas shorts                 | 499  |
       | Kläder      | Adidas t-shirt                | 399  |
       | Kläder      | Adidas kept                   | 299  |
-
-
-
-

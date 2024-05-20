@@ -1,12 +1,11 @@
 Feature: As a user I want to be able to see all descriptions of all products when I have chosen the category "Alla" and that correct descriptions shows on all products when i choose a category.
 
   Scenario Outline: When I choose the category "<category>" the product "<productName>" should be shown with the description "<description>".
-    Given that I go to the product page
-    When I choose to see the category "<category>"
+    Given that I will go to the product page
+    When I want to view the category "<category>"
     Then the product "<productName>" should be shown with the description "<description>"
 
     Examples:
-      Examples:
       | category    | productName                   | description                                                                                                          |
       | Alla        | Adidas Adipower               | Adidas snabbaste rack                                                                                                |
       | Alla        | Adidas Ctrl                   | Adidas kontrollrack                                                                                                  |
@@ -40,27 +39,3 @@ Feature: As a user I want to be able to see all descriptions of all products whe
       | Kläder      | Adidas shorts                 | Snyggaste på marknaden                                                                                               |
       | Kläder      | Adidas t-shirt                | Nyaste designen                                                                                                      |
       | Kläder      | Adidas kept                   | Perfekt till soliga dagar                                                                                            |
-
-
-
-
-
-
-
-
-
-      | category    | product         | description     |                                                                                                    |
-      | 
-      | Övrigt      |                                               |
-      | Övrigt      |                                                                                |
-      | Övrigt      |                                                                                                  |
-      | Skor        |                                                                                                |
-      | Skor        |                                                                                                    |
-      | Skor        |                                                                                                          |
-      | Kläder      |                                                                                               |
-      | Kläder      |                                                                                                      |
-      | Kläder      |                                                                                            |
-
-
-
-
