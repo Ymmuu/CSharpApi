@@ -1451,7 +1451,7 @@
 		{
 			"name": "Make a comment visitor",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
