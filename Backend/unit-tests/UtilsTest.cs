@@ -27,20 +27,13 @@ public class UtilsTest(Xlog Console)
         // newly created users in the db
         Console.WriteLine($"The test expected that {mockUsersNotInDb.Length} users should be added.");
         Console.WriteLine($"And {result.Length} users were added.");
-        Console.WriteLine("The test also asserts that the users added " +
-        // funkar inte Console.WL, använd output.WriteLine
-       
-        
-            "are equivalent (the same) to the expected users!");
+        Console.WriteLine("The test also asserts that the users added " + "are equivalent (the same) to the expected users!");
         Assert.Equivalent(mockUsersNotInDb, result);
         Console.WriteLine("The test passed!");
     }
     
     
     
-    
-
-
     [Theory]
     [InlineData("abC9#fgh", true)]  // ok
     [InlineData("stU5/xyz", true)]  // ok too
@@ -54,6 +47,7 @@ public class UtilsTest(Xlog Console)
     }
     
 
+
     /* 
     // Skrev denna själv med fick inte rätt på tex "hello", då suddades "hell" ut och skrevs ut ****o.
 
@@ -64,11 +58,8 @@ public class UtilsTest(Xlog Console)
         Arr badWords = JSON.Parse(read);
 
         var input = "Hello. This is a test sentence with fuck, hell and shit.";
-    
         var expectedOutput = "Hello. This is a test sentence with ****, **** and ****.";
-
         var result = Utils.RemoveBadWords(input, "****");
-
         Assert.Equal(expectedOutput, result);
 
         Console.WriteLine($"{result}");
@@ -107,9 +98,7 @@ public class UtilsTest(Xlog Console)
 
         int numberOfDomains = result.GetKeys().Count();
         Console.WriteLine($"There are {numberOfDomains} different domains registered.");
-
     }
-
 
 
     
@@ -117,9 +106,7 @@ public class UtilsTest(Xlog Console)
     public void TestRemoveMockUsers()
     {
         Arr usersBeforeRemoval = SQLQuery("SELECT email FROM users");
-
         var successfullyRemovedUsers = Utils.RemoveMockUsers();
-
         Arr usersAfterRemoval = SQLQuery("SELECT email FROM users");
 
         Assert.IsType<Arr>(successfullyRemovedUsers);
@@ -134,9 +121,6 @@ public class UtilsTest(Xlog Console)
 
         // To print out all removed users without passwords
         //Console.WriteLine($"{successfullyRemovedUsers}");
-
     }
     
-
-
 }

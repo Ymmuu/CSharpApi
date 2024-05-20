@@ -61,7 +61,6 @@ public static class Utils
         return input;
     }
     */
-
     public static string RemoveBadWords(string comment, string replaceWith = "---")
     {
         comment = " " + comment;
@@ -79,13 +78,10 @@ public static class Utils
 
     public static Obj CountDomainsFromUserEmails()
     {
-
         var users = SQLQuery(@"SELECT email FROM users");
 
         Dictionary<string, int> domainCounts = new Dictionary<string, int>();
-
         Regex domainRegex = new Regex(@"@(?<domain>[\w.-]+)$");
-
         foreach (var user in users)
         {
             string email = user["email"];
@@ -105,7 +101,6 @@ public static class Utils
                 }
             }
         }
-
         Obj result = new Obj();
         foreach (var domainCount in domainCounts)
         {
@@ -117,13 +112,6 @@ public static class Utils
 
 
 
-
-
-
-
-    
-
-    
     public static Arr RemoveMockUsers()
     {
         Arr successfullyRemovedUsers = Arr();
@@ -145,7 +133,6 @@ public static class Utils
 
         return successfullyRemovedUsers;
     }
-    
     
 
 }
