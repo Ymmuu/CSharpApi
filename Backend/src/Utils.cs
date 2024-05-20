@@ -35,6 +35,48 @@ public static class Utils
     }
 
 
+    public static bool IsPasswordGoodEnough(string password)
+    {
+        return password.Length >= 8
+            && password.Any(Char.IsDigit)
+            && password.Any(Char.IsLower)
+            && password.Any(Char.IsUpper)
+            && password.Any(x => !Char.IsLetterOrDigit(x));
+    }
+        
+    
+    /*
+    // Skrev denna själv med fick inte rätt på tex "hello", då suddades "hell" ut och skrevs ut ****o.
+
+    public static string RemoveBadWords(string input, string expectedOutput)
+    {
+        var read = File.ReadAllText(FilePath("json", "bad-words.json"));
+        Arr badWords = JSON.Parse(read);
+
+        foreach (var badWord in badWords)
+    {
+        input = input.Replace(badWord.Value.ToString(), expectedOutput);
+    }
+
+        return input;
+    }
+    */
+
+    public static string RemoveBadWords(string comment, string replaceWith = "---")
+    {
+        comment = " " + comment;
+        replaceWith = " " + replaceWith + "$1";
+        badWords.ForEach(bad =>
+        {
+            var pattern = @$" {bad}([\,\.\!\?\:\; ])";
+            comment = Regex.Replace(
+                comment, pattern, replaceWith, RegexOptions.IgnoreCase);
+        });
+        return comment[1..];
+    }
+
+
+
     public static Obj CountDomainsFromUserEmails()
     {
 
@@ -75,45 +117,10 @@ public static class Utils
 
 
 
-    public static bool IsPasswordGoodEnough(string password)
-    {
-        return password.Length >= 8
-            && password.Any(Char.IsDigit)
-            && password.Any(Char.IsLower)
-            && password.Any(Char.IsUpper)
-            && password.Any(x => !Char.IsLetterOrDigit(x));
-    }
-        
-    
-    /*
-    // Skrev denna själv med fick inte rätt på tex "hello", då suddades "hell" ut och skrevs ut ****o.
 
-    public static string RemoveBadWords(string input, string expectedOutput)
-    {
-        var read = File.ReadAllText(FilePath("json", "bad-words.json"));
-        Arr badWords = JSON.Parse(read);
 
-        foreach (var badWord in badWords)
-    {
-        input = input.Replace(badWord.Value.ToString(), expectedOutput);
-    }
 
-        return input;
-    }
-    */
 
-    public static string RemoveBadWords(string comment, string replaceWith = "---")
-    {
-        comment = " " + comment;
-        replaceWith = " " + replaceWith + "$1";
-        badWords.ForEach(bad =>
-        {
-            var pattern = @$" {bad}([\,\.\!\?\:\; ])";
-            comment = Regex.Replace(
-                comment, pattern, replaceWith, RegexOptions.IgnoreCase);
-        });
-        return comment[1..];
-    }
     
 
     

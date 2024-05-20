@@ -36,24 +36,7 @@ public class UtilsTest(Xlog Console)
         Console.WriteLine("The test passed!");
     }
     
-
     
-    [Fact]
-    public void TestCountDomainsFromUserEmails()
-    {
-        var result = Utils.CountDomainsFromUserEmails();
-
-        Assert.True(result.GetKeys().Count() > 0);
-
-        Console.WriteLine("User count per domain:");
-        foreach (var count in result.GetKeys())
-        {
-            var domain = count.ToString();
-            var userCount = (int)result[domain];
-            Console.WriteLine($"Domain: {domain}, User count: {userCount}");
-        }
-
-    }
     
     
 
@@ -114,6 +97,21 @@ public class UtilsTest(Xlog Console)
     }
 
 
+
+    [Fact]
+    public void TestCountDomainsFromUserEmails()
+    {
+        var usersDb = SQLQuery(@"SELECT email FROM users");
+        Obj result = Utils.CountDomainsFromUserEmails();
+        Assert.True(result.GetKeys().Count() > 0);
+
+        int numberOfDomains = result.GetKeys().Count();
+        Console.WriteLine($"There are {numberOfDomains} different domains registered.");
+
+    }
+
+
+
     
     [Fact]
     public void TestRemoveMockUsers()
@@ -134,8 +132,8 @@ public class UtilsTest(Xlog Console)
 
         Assert.Equal(usersBeforeRemoval.Length - successfullyRemovedUsers.Length, usersAfterRemoval.Length);
 
-
-        Console.WriteLine($"{successfullyRemovedUsers}");
+        // To print out all removed users without passwords
+        //Console.WriteLine($"{successfullyRemovedUsers}");
 
     }
     
